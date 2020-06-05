@@ -1,26 +1,11 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
-function App() {
+export default function App() {
+  const [user, setUser] = useState(null);
+  // When user has a content, we want to say that the user is logged in
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {user ? <h1>Hi, you're logged in</h1> : <h1>You are not logged in</h1>};
     </div>
   );
 }
-
-export default App;
