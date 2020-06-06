@@ -1,0 +1,40 @@
+@import "../../scss/index.scss";
+
+.signin-signup {
+  // This is the same than .signin-signup__left
+  &__left {
+    overflow: hidden;
+    min-height: 100vh;
+    background-color: $primary-light;
+    background-image: linear-gradient(to right, #c04848, #480048);
+    display: flex;
+    align-items: center;
+    justify-content: left;
+
+    img {
+      position: absolute;
+      right: -310px;
+    }
+
+    div {
+      z-index: 1;
+
+      h2 {
+        display: flex;
+        align-items: center;
+        font-size: 20px;
+        margin-bottom: 40px;
+        font-weight: bold;
+
+        svg {
+          margin-right: 20px;
+          font-size: 30px;
+          width: 40px;
+        }
+      }
+    }
+  }
+
+  &__right {
+  }
+}

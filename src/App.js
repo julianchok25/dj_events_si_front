@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Alert } from "react-bootstrap";
-import SignInSingUp from "./page/SigninSingUp";
+import SignInSignUp from "./page/SignInSignUp";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -9,13 +9,11 @@ export default function App() {
     <div>
       {!user ? (
         <div>
-          <SignInSingUp />
+          <SignInSignUp />
         </div>
       ) : (
         <h1>You are not logged in</h1>
       )}
-      <Button variant="primary">Button</Button>
-      <Alert variant="danger">This is a alert—check it out!</Alert>
     </div>
   );
 }
