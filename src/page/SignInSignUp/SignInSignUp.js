@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -7,18 +7,33 @@ import {
   faUserCheck,
   faGlobeAmericas,
 } from "@fortawesome/free-solid-svg-icons";
+import BasicModal from "../../components/Modal/BasicModal";
 import Logo from "../../assets/png/VinylRed.png";
 import "./SignInSignUp.scss";
 
 export default function SignInSignUp() {
+  const [showModal, setShowModal] = useState(false);
+  // content to render the modal
+  const [contentModal, setContentModal] = useState(null);
+  // Open and add content to the modal
+  const openModal = (content) => {
+    setShowModal(true);
+    setContentModal(content);
+  };
   return (
     // fluid for width: 100% across all viewport and device sizes.
-    <Container className="signin-signup" fluid>
-      <Row>
-        <LeftComponent />
-        <RightComponent />
-      </Row>
-    </Container>
+    <>
+      <Container className="signin-signup" fluid>
+        <Row>
+          <LeftComponent />
+          <RightComponent openModal={openModal} setShowModal={setShowModal} />
+        </Row>
+      </Container>
+      <BasicModal show={showModal} setShow={setShowModal}>
+        {/* Here is the children */}
+        {contentModal}
+      </BasicModal>
+    </>
   );
 }
 
@@ -48,14 +63,22 @@ function LeftComponent() {
   );
 }
 
-function RightComponent() {
+function RightComponent(props) {
+  const { openModal, setShowModal } = props;
   return (
     <Col className="signin-signup__right" xs={6}>
       <div>
         <h2>Here, Everyone Listens to you.</h2>
         <h3>Join today, we need you.!!</h3>
-        <Button variant="info">Sign Up</Button>
-        <Button variant="outline-light">Log In</Button>
+        <Button variant="info" onClick={() => openModal(<h2>Sign Up form</h2>)}>
+          Sign Up
+        </Button>
+        <Button
+          variant="outline-light"
+          onClick={() => openModal(<h2>Log In form</h2>)}
+        >
+          Log In
+        </Button>
       </div>
     </Col>
   );
