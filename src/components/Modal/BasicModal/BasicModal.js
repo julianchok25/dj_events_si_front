@@ -16,7 +16,7 @@ export default function BasicModal(props) {
     >
       <Modal.Header>
         <Modal.Title>
-          <h2>Modal</h2>
+          <h2>Logo</h2>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>{children}</Modal.Body>

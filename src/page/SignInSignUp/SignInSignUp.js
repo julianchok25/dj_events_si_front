@@ -8,6 +8,7 @@ import {
   faGlobeAmericas,
 } from "@fortawesome/free-solid-svg-icons";
 import BasicModal from "../../components/Modal/BasicModal";
+import SignUpForm from "../../components/SignUpForm";
 import Logo from "../../assets/png/VinylRed.png";
 import "./SignInSignUp.scss";
 
@@ -70,7 +71,10 @@ function RightComponent(props) {
       <div>
         <h2>Here, Everyone Listens to you.</h2>
         <h3>Join today, we need you.!!</h3>
-        <Button variant="info" onClick={() => openModal(<h2>Sign Up form</h2>)}>
+        <Button
+          variant="info"
+          onClick={() => openModal(<SignUpForm setShowModal={setShowModal} />)}
+        >
           Sign Up
         </Button>
         <Button
