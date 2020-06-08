@@ -51,7 +51,12 @@ function LeftComponent() {
 function RightComponent() {
   return (
     <Col className="signin-signup__right" xs={6}>
-      <h2>Right Component...</h2>
+      <div>
+        <h2>Here, Everyone Listens to you.</h2>
+        <h3>Join today, we need you.!!</h3>
+        <Button variant="info">Sign Up</Button>
+        <Button variant="outline-light">Log In</Button>
+      </div>
     </Col>
   );
 }
