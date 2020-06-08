@@ -1,0 +1,22 @@
+@import "../../../scss/index.scss";
+
+.basic-modal {
+  .modal-content {
+    background-color: $background-grey-dark;
+    color: $font-light;
+    border-radius: 25px;
+
+    .modal-header {
+      padding: 15px;
+      border: 0px;
+
+      .modal-title {
+        margin: 0px auto;
+      }
+    }
+
+    .modal-body {
+      padding: 20px 40px 40px 40px;
+    }
+  }
+}
