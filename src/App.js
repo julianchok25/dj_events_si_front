@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 // import { Button, Alert } from "react-bootstrap";
 import SignInSignUp from "./page/SignInSignUp";
+import { ToastContainer } from "react-toastify";
 
 export default function App() {
   const [user, setUser] = useState(null);
