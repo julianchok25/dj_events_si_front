@@ -35,3 +35,35 @@ export function signUpApi(user) {
   //   console.log(tempUser);
   //   console.log(url);
 }
+
+export function signInApi(user) {
+  const url = `${API_HOST}/logins`;
+
+  const data = {
+    ...user,
+    email: user.email.toLowerCase(),
+  };
+
+  const params = {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(data),
+  };
+
+  // a fech returns a promise
+  return fetch(url, params)
+    .then((response) => {
+      if (response.status >= 200 && response.status < 300) {
+        return response.json();
+      }
+      return { message: "Invalid Email or Password" };
+    })
+    .then((result) => {
+      return result;
+    })
+    .catch((err) => {
+      return err;
+    });
+}

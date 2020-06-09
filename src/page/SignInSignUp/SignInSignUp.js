@@ -9,6 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import BasicModal from "../../components/Modal/BasicModal";
 import SignUpForm from "../../components/SignUpForm";
+import SignInForm from "../../components/SignInForm";
 import Logo from "../../assets/png/VinylRed.png";
 import "./SignInSignUp.scss";
 
@@ -79,7 +80,7 @@ function RightComponent(props) {
         </Button>
         <Button
           variant="outline-light"
-          onClick={() => openModal(<h2>Log In form</h2>)}
+          onClick={() => openModal(<SignInForm />)}
         >
           Log In
         </Button>
