@@ -4,7 +4,7 @@ import { Form, Button, Spinner } from "react-bootstrap";
 import { values, size } from "lodash";
 import { toast } from "react-toastify";
 import { isEmailValid } from "../../utils/Validations";
-import { signInApi } from "../../api/auth";
+import { signInApi, setTokenApi } from "../../api/auth";
 
 export default function SignInForm() {
   //Setting initial values for formData
@@ -31,6 +31,7 @@ export default function SignInForm() {
             if (response.message) {
               toast.warning(response.message);
             } else {
+              setTokenApi(response.token);
               console.log(response.token);
               toast.success("Login Success");
             }

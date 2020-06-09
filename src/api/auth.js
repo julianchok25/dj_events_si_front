@@ -1,4 +1,4 @@
-import { API_HOST } from "../utils/constants";
+import { API_HOST, TOKEN } from "../utils/constants";
 export function signUpApi(user) {
   const url = `${API_HOST}/sign-ins`;
   // Creating temp user to manipulate the data,arriving properties should never be used
@@ -66,4 +66,10 @@ export function signInApi(user) {
     .catch((err) => {
       return err;
     });
+}
+
+//Function for saving the token to the localStorage
+export function setTokenApi(token) {
+  localStorage.setItem(TOKEN, token);
+  // localStorage.getItem(TOKEN);
 }
