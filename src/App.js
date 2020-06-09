@@ -15,6 +15,17 @@ export default function App() {
       ) : (
         <h1>You are not logged in</h1>
       )}
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnVisibilityChange
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 }
