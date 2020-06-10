@@ -1,14 +1,22 @@
 import React from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import LeftMenu from "../../components/LeftMenu";
 
 import "./BasicLayout.scss";
 
 // Layouts render the parent (Menu) in all pages
 export default function BasicLayout(props) {
-  const { children } = props;
+  const { className, children } = props;
   return (
-    <div>
-      <h2>Menu...</h2>
-      {children}
-    </div>
+    <Container className={`basic-layout ${className}`}>
+      <Row>
+        <Col xs={3} className="basic-layout__menu">
+          <LeftMenu />
+        </Col>
+        <Col xs={9} className="basic-layout__content">
+          {children}
+        </Col>
+      </Row>
+    </Container>
   );
 }
