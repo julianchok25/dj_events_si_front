@@ -4,6 +4,7 @@ import SignInSignUp from "./page/SignInSignUp";
 import { ToastContainer } from "react-toastify";
 import { AuthContext } from "./utils/contexts";
 import { isUserLogedApi } from "./api/auth";
+import Routing from "./routes/Routing";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -23,7 +24,7 @@ export default function App() {
     // Context involves all the app
     <AuthContext.Provider value={user}>
       {user ? (
-        <h1>You are logged in</h1>
+        <Routing />
       ) : (
         <SignInSignUp setRefreshCheckLogin={setRefreshCheckLogin} />
       )}
