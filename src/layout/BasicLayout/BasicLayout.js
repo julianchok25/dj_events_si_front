@@ -6,12 +6,12 @@ import "./BasicLayout.scss";
 
 // Layouts render the parent (Menu) in all pages
 export default function BasicLayout(props) {
-  const { className, children } = props;
+  const { className, setRefreshCheckLogin, children } = props;
   return (
     <Container className={`basic-layout ${className}`}>
       <Row>
         <Col xs={3} className="basic-layout__menu">
-          <LeftMenu />
+          <LeftMenu setRefreshCheckLogin={setRefreshCheckLogin} />
         </Col>
         <Col xs={9} className="basic-layout__content">
           {children}

@@ -24,7 +24,8 @@ export default function App() {
     // Context involves all the app
     <AuthContext.Provider value={user}>
       {user ? (
-        <Routing />
+        // Here, setRefreshCheckLogin is for validate the logout in home page
+        <Routing setRefreshCheckLogin={setRefreshCheckLogin} />
       ) : (
         <SignInSignUp setRefreshCheckLogin={setRefreshCheckLogin} />
       )}
