@@ -39,7 +39,7 @@ export default function LeftMenu(props) {
         <FontAwesomeIcon icon={faPowerOff} /> Logout
       </Link>
 
-      <Button variant="info">New Post</Button>
+      <Button variant="danger">New Post</Button>
     </div>
   );
 }
