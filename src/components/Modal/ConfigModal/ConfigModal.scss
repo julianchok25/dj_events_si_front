@@ -1,4 +1,43 @@
 @import "../../../scss/index.scss";
 
 .config-modal {
+  .modal-content {
+    background-color: $background-grey-dark;
+    border-radius: 25px;
+    overflow: hidden;
+    color: $font-light;
+
+    .modal-header {
+      border-bottom: 1px solid $border-grey;
+      padding: 15px;
+
+      .modal-title {
+        display: flex;
+        align-items: center;
+
+        svg {
+          width: 15px;
+          height: 15px;
+          // fill es equal to color but for svg's
+          fill: $primary-light;
+          margin-left: 10px;
+          margin-right: 20px;
+
+          &:hover {
+            // with cursor pointer we can see the hand icon
+            cursor: pointer;
+          }
+        }
+
+        h2 {
+          font-size: 18px;
+          margin: 0;
+        }
+      }
+    }
+
+    .modal-body {
+      padding: 0;
+    }
+  }
 }
