@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Button, Spinner } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
 import { toast } from "react-toastify";
+import useAuth from "../../hooks/useAuth";
 import BasicLayout from "../../layout/BasicLayout";
 import BannerAvatar from "../../components/User/BannerAvatar";
+import UserInfo from "../../components/User/UserInfo";
 import { getUserApi } from "../../api/user";
 
 import "./User.scss";
@@ -15,6 +17,8 @@ function User(props) {
   const [user, setUser] = useState(null);
   // Getting the params in match object wit destructirung
   const { params } = match;
+  // user info that is logged
+  const loggedUser = useAuth();
   // console.log(match.params.id);
   //Siempre que los params cambian, se vuelve a ejecuar
   useEffect(() => {
@@ -34,8 +38,8 @@ function User(props) {
       <div className="user__title">
         <h2>{user ? `${user.name} ${user.lastName}` : "User doesn't exist"}</h2>
       </div>
-      <BannerAvatar user={user} />
-      <div>Users Info</div>
+      <BannerAvatar user={user} loggedUser={loggedUser} />
+      <UserInfo user={user} />
       <div className="user__posts">Post list</div>
     </BasicLayout>
   );
