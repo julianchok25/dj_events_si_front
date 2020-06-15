@@ -8,9 +8,15 @@ export default function EditUserForm(props) {
   const { user, setShowModal } = props;
   // Creating a copy of user data to be able to modify it
   const [formData, setFormData] = useState(initialValue(user));
+  // modify the value when field is changed dynamically
+  const onChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    console.log(formData);
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
+    console.log(formData);
   };
   return (
     <div className="edit-user-form">
@@ -23,6 +29,7 @@ export default function EditUserForm(props) {
                 placeholder="Name"
                 name="name"
                 defaultValue={formData.name}
+                onChange={onChange}
               />
             </Col>
             <Col>
@@ -31,6 +38,7 @@ export default function EditUserForm(props) {
                 placeholder="Last Name"
                 name="lastName"
                 defaultValue={formData.lastName}
+                onChange={onChange}
               />
             </Col>
           </Row>
@@ -43,6 +51,7 @@ export default function EditUserForm(props) {
             type="text"
             name="bio"
             defaultValue={formData.webSite}
+            onChange={onChange}
           />
         </Form.Group>
         <Form.Group>
@@ -51,12 +60,14 @@ export default function EditUserForm(props) {
             placeholder="Web Site"
             name="webSite"
             defaultValue={formData.webSite}
+            onChange={onChange}
           />
         </Form.Group>
         <Form.Group>
           <DatePicker
             placeholder="Birthdate"
             selected={new Date(formData.birthDate)}
+            onChange={(value) => setFormData({ ...formData, birthDate: value })}
           ></DatePicker>
         </Form.Group>
         <Button className="btn-submit" variant="danger" type="submit">
