@@ -1,5 +1,6 @@
 import React from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
+import DatePicker from "react-datepicker";
 
 import "./EditUserForm.scss";
 
@@ -35,6 +36,12 @@ export default function EditUserForm() {
         </Form.Group>
         <Form.Group>
           <Form.Control type="text" placeholder="Web Site" name="webSite" />
+        </Form.Group>
+        <Form.Group>
+          <DatePicker
+            placeholder="Birthdate"
+            selected={new Date()}
+          ></DatePicker>
         </Form.Group>
         <Button className="btn-submit" variant="danger" type="submit">
           Update
