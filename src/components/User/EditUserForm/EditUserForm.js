@@ -14,9 +14,14 @@ export default function EditUserForm(props) {
   const [urlBanner, setUrlBanner] = useState(
     user?.banner ? `${API_HOST}/banners?id=${user.id}` : null
   );
+  const [urlAvatar, setUrlAvatar] = useState(
+    user?.avatar ? `${API_HOST}/avatars?id=${user.id}` : null
+  );
   // Sending image to the server
   const [bannerFile, setBannerFile] = useState(null);
+  const [avatarFile, setAvatarFile] = useState(null);
   // Saving the file
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const onDropBanner = useCallback((acceptedFile) => {
     const file = acceptedFile[0];
     setUrlBanner(URL.createObjectURL(file));
@@ -31,6 +36,23 @@ export default function EditUserForm(props) {
     multiple: false,
     onDrop: onDropBanner,
   });
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const onDropAvatar = useCallback((acceptedFile) => {
+    const file = acceptedFile[0];
+    setUrlAvatar(URL.createObjectURL(file));
+    setAvatarFile(file);
+  });
+
+  const {
+    getRootProps: getRootAvatarProps,
+    getInputProps: getInputAvatarProps,
+  } = useDropzone({
+    accept: "image/jpeg, image/png",
+    noKeyboard: true,
+    multiple: false,
+    onDrop: onDropAvatar,
+  });
   // modify the value when field is changed dynamically
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -40,6 +62,7 @@ export default function EditUserForm(props) {
     e.preventDefault();
     // console.log(formData);
     // console.log(bannerFile);
+    // console.log(avatarFile);
   };
   return (
     <div className="edit-user-form">
@@ -49,6 +72,14 @@ export default function EditUserForm(props) {
         {...getRootBannerProps()}
       >
         <input {...getInputBannerProps()} />
+        <Camera />
+      </div>
+      <div
+        className="avatar"
+        style={{ backgroundImage: `url('${urlAvatar}')` }}
+        {...getRootAvatarProps()}
+      >
+        <input {...getInputAvatarProps()} />
         <Camera />
       </div>
       <Form onSubmit={onSubmit}>
