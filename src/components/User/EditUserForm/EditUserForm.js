@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Button, Row, Col, Spinner } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import { useDropzone } from "react-dropzone";
 import { API_HOST } from "../../../utils/constants";
@@ -26,6 +26,8 @@ export default function EditUserForm(props) {
   // Sending image to the server
   const [bannerFile, setBannerFile] = useState(null);
   const [avatarFile, setAvatarFile] = useState(null);
+  // State for spinner
+  const [stateSpinner, setSpinner] = useState(false);
   // Saving the file
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onDropBanner = useCallback((acceptedFile) => {
@@ -64,29 +66,32 @@ export default function EditUserForm(props) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
+    setSpinner(true);
     e.preventDefault();
     // console.log("Editando usuario");
     // console.log(formData);
     // console.log(bannerFile);
     // console.log(avatarFile);
     if (bannerFile) {
-      uploadBannerApi(bannerFile).catch(() => {
+      await uploadBannerApi(bannerFile).catch(() => {
         toast.error("Error when uploading the new banner");
       });
     }
     if (avatarFile) {
-      uploadAvatarApi(avatarFile).catch(() => {
+      await uploadAvatarApi(avatarFile).catch(() => {
         toast.error("Error when uploading the new avatar");
       });
     }
-    updateProfileApi(formData)
+    await updateProfileApi(formData)
       .then(() => {
         setShowModal(false);
       })
       .catch(() => {
         toast.error("Error updating user data");
       });
+    setSpinner(false);
+    window.location.reload();
   };
   return (
     <div className="edit-user-form">
@@ -157,6 +162,7 @@ export default function EditUserForm(props) {
           ></DatePicker>
         </Form.Group>
         <Button className="btn-submit" variant="danger" type="submit">
+          {stateSpinner && <Spinner animation="border" size="sm" />}
           Update
         </Button>
       </Form>
