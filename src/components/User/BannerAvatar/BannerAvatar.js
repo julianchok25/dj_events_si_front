@@ -5,12 +5,13 @@ import DefaultAvatar from "../../../assets/png/default_avatar.png";
 import ConfigModal from "../../../components/Modal/ConfigModal";
 import EditUserForm from "../../User/EditUserForm/";
 import { API_HOST } from "../../../utils/constants";
-import { checkFollowApi } from "../../../api/follow";
+import { checkFollowApi, followUserApi } from "../../../api/follow";
 
 export default function BannerAvatar(props) {
   const { user, loggedUser } = props;
   const [showModal, setShowModal] = useState(false);
   const [stateFollowing, setFollowing] = useState(null);
+  const [reloadFollow, setReloadFollow] = useState(false);
   const urlBanner = user?.banner ? `${API_HOST}/banners?id=${user.id}` : null;
   const urlAvatar = user?.avatar
     ? `${API_HOST}/avatars?id=${user.id}`
@@ -24,7 +25,13 @@ export default function BannerAvatar(props) {
         setFollowing(false);
       }
     });
-  }, [user]);
+    setReloadFollow(false);
+  }, [user, reloadFollow]);
+
+  const onFollow = () => {
+    followUserApi(user.id).then(() => {});
+    setReloadFollow(true);
+  };
 
   return (
     <div
@@ -47,7 +54,9 @@ export default function BannerAvatar(props) {
             (stateFollowing ? (
               <Button variant="danger">Following</Button>
             ) : (
-              <Button variant="danger">Follow</Button>
+              <Button variant="danger" onClick={onFollow}>
+                Follow
+              </Button>
             ))}
         </div>
       )}

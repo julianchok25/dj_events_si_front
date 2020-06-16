@@ -21,3 +21,24 @@ export function checkFollowApi(UserID) {
       return err;
     });
 }
+
+export function followUserApi(UserID) {
+  const url = `${API_HOST}/high-relations?id=${UserID}`;
+
+  const params = {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${getTokenApi()}`,
+    },
+  };
+  return fetch(url, params)
+    .then((response) => {
+      return response.json();
+    })
+    .then((result) => {
+      return result;
+    })
+    .catch((err) => {
+      return err;
+    });
+}
