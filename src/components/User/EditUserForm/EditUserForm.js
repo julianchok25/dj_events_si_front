@@ -4,7 +4,11 @@ import DatePicker from "react-datepicker";
 import { useDropzone } from "react-dropzone";
 import { API_HOST } from "../../../utils/constants";
 import { Camera } from "../../../utils/Icons";
-import { uploadBannerApi, uploadAvatarApi } from "../../../api/user";
+import {
+  uploadBannerApi,
+  uploadAvatarApi,
+  updateProfileApi,
+} from "../../../api/user";
 
 import "./EditUserForm.scss";
 import { toast } from "react-toastify";
@@ -76,6 +80,13 @@ export default function EditUserForm(props) {
         toast.error("Error when uploading the new avatar");
       });
     }
+    updateProfileApi(formData)
+      .then(() => {
+        setShowModal(false);
+      })
+      .catch(() => {
+        toast.error("Error updating user data");
+      });
   };
   return (
     <div className="edit-user-form">
@@ -125,7 +136,7 @@ export default function EditUserForm(props) {
             placeholder="Add your biography"
             type="text"
             name="bio"
-            defaultValue={formData.webSite}
+            defaultValue={formData.bio}
             onChange={onChange}
           />
         </Form.Group>
