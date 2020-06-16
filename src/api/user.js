@@ -26,3 +26,32 @@ export function getUserApi(id) {
       return err;
     });
 }
+
+export function uploadBannerApi(file) {
+  const url = `${API_HOST}/upload-banners`;
+
+  const formData = new FormData();
+  formData.append("banner", file);
+  // console.log(formData);
+
+  const params = {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${getTokenApi()}`,
+    },
+    body: formData,
+  };
+
+  return fetch(url, params)
+    .then((response) => {
+      // Header response
+      return response.json();
+    })
+    .then((result) => {
+      // body response
+      return result;
+    })
+    .catch((err) => {
+      return err;
+    });
+}

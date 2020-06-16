@@ -4,8 +4,10 @@ import DatePicker from "react-datepicker";
 import { useDropzone } from "react-dropzone";
 import { API_HOST } from "../../../utils/constants";
 import { Camera } from "../../../utils/Icons";
+import { uploadBannerApi } from "../../../api/user";
 
 import "./EditUserForm.scss";
+import { toast } from "react-toastify";
 
 export default function EditUserForm(props) {
   const { user, setShowModal } = props;
@@ -60,9 +62,15 @@ export default function EditUserForm(props) {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    // console.log("Editando usuario");
     // console.log(formData);
     // console.log(bannerFile);
     // console.log(avatarFile);
+    if (urlBanner) {
+      uploadBannerApi(bannerFile).catch(() => {
+        toast.error("Error when uploading the new banner");
+      });
+    }
   };
   return (
     <div className="edit-user-form">
