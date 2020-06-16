@@ -4,7 +4,7 @@ import DatePicker from "react-datepicker";
 import { useDropzone } from "react-dropzone";
 import { API_HOST } from "../../../utils/constants";
 import { Camera } from "../../../utils/Icons";
-import { uploadBannerApi } from "../../../api/user";
+import { uploadBannerApi, uploadAvatarApi } from "../../../api/user";
 
 import "./EditUserForm.scss";
 import { toast } from "react-toastify";
@@ -66,9 +66,14 @@ export default function EditUserForm(props) {
     // console.log(formData);
     // console.log(bannerFile);
     // console.log(avatarFile);
-    if (urlBanner) {
+    if (bannerFile) {
       uploadBannerApi(bannerFile).catch(() => {
         toast.error("Error when uploading the new banner");
+      });
+    }
+    if (avatarFile) {
+      uploadAvatarApi(avatarFile).catch(() => {
+        toast.error("Error when uploading the new avatar");
       });
     }
   };

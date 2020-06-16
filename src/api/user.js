@@ -55,3 +55,31 @@ export function uploadBannerApi(file) {
       return err;
     });
 }
+
+export function uploadAvatarApi(file) {
+  const url = `${API_HOST}/upload-avatars`;
+
+  const formData = new FormData();
+  formData.append("avatar", file);
+
+  const params = {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${getTokenApi()}`,
+    },
+    body: formData,
+  };
+
+  return fetch(url, params)
+    .then((response) => {
+      // Header response
+      return response.json();
+    })
+    .then((result) => {
+      // body response
+      return result;
+    })
+    .catch((err) => {
+      return err;
+    });
+}
