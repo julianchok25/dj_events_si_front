@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import DatePicker from "react-datepicker";
+import { useDropzone } from "react-dropzone";
+import { API_HOST } from "../../../utils/constants";
+import { Camera } from "../../../utils/Icons";
 
 import "./EditUserForm.scss";
 
@@ -8,18 +11,46 @@ export default function EditUserForm(props) {
   const { user, setShowModal } = props;
   // Creating a copy of user data to be able to modify it
   const [formData, setFormData] = useState(initialValue(user));
+  const [urlBanner, setUrlBanner] = useState(
+    user?.banner ? `${API_HOST}/banners?id=${user.id}` : null
+  );
+  // Sending image to the server
+  const [bannerFile, setBannerFile] = useState(null);
+  // Saving the file
+  const onDropBanner = useCallback((acceptedFile) => {
+    const file = acceptedFile[0];
+    setUrlBanner(URL.createObjectURL(file));
+    setBannerFile(file);
+  });
+  const {
+    getRootProps: getRootBannerProps,
+    getInputProps: getInputBannerProps,
+  } = useDropzone({
+    accept: "image/jpeg, image/png",
+    noKeyboard: true,
+    multiple: false,
+    onDrop: onDropBanner,
+  });
   // modify the value when field is changed dynamically
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    console.log(formData);
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    // console.log(formData);
+    // console.log(bannerFile);
   };
   return (
     <div className="edit-user-form">
+      <div
+        className="banner"
+        style={{ backgroundImage: `url('${urlBanner}')` }}
+        {...getRootBannerProps()}
+      >
+        <input {...getInputBannerProps()} />
+        <Camera />
+      </div>
       <Form onSubmit={onSubmit}>
         <Form.Group>
           <Row>
