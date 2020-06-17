@@ -42,3 +42,24 @@ export function followUserApi(UserID) {
       return err;
     });
 }
+
+export function unFollowUserApi(UserID) {
+  const url = `${API_HOST}/down-relations?id=${UserID}`;
+
+  const params = {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${getTokenApi()}`,
+    },
+  };
+  return fetch(url, params)
+    .then((response) => {
+      return response.json();
+    })
+    .then((result) => {
+      return result;
+    })
+    .catch((err) => {
+      return err;
+    });
+}

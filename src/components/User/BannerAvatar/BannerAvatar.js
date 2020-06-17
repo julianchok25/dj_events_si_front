@@ -5,7 +5,11 @@ import DefaultAvatar from "../../../assets/png/default_avatar.png";
 import ConfigModal from "../../../components/Modal/ConfigModal";
 import EditUserForm from "../../User/EditUserForm/";
 import { API_HOST } from "../../../utils/constants";
-import { checkFollowApi, followUserApi } from "../../../api/follow";
+import {
+  checkFollowApi,
+  followUserApi,
+  unFollowUserApi,
+} from "../../../api/follow";
 
 export default function BannerAvatar(props) {
   const { user, loggedUser } = props;
@@ -18,19 +22,28 @@ export default function BannerAvatar(props) {
     : DefaultAvatar;
 
   useEffect(() => {
-    checkFollowApi(user?.id).then((response) => {
-      if (response?.status) {
-        setFollowing(true);
-      } else {
-        setFollowing(false);
-      }
-    });
+    if (user) {
+      checkFollowApi(user?.id).then((response) => {
+        if (response?.status) {
+          setFollowing(true);
+        } else {
+          setFollowing(false);
+        }
+      });
+    }
     setReloadFollow(false);
   }, [user, reloadFollow]);
 
   const onFollow = () => {
-    followUserApi(user.id).then(() => {});
-    setReloadFollow(true);
+    followUserApi(user.id).then(() => {
+      setReloadFollow(true);
+    });
+  };
+
+  const onUnFollow = () => {
+    unFollowUserApi(user.id).then(() => {
+      setReloadFollow(true);
+    });
   };
 
   return (
@@ -52,7 +65,13 @@ export default function BannerAvatar(props) {
           {loggedUser._id !== user.id &&
             stateFollowing !== null &&
             (stateFollowing ? (
-              <Button variant="danger">Following</Button>
+              <Button
+                variant="danger"
+                className="unfollow"
+                onClick={onUnFollow}
+              >
+                <span>Following</span>
+              </Button>
             ) : (
               <Button variant="danger" onClick={onFollow}>
                 Follow

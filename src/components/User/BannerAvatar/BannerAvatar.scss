@@ -36,6 +36,22 @@
         background-color: $primary-light;
         opacity: 0.6;
       }
+
+      &.unfollow {
+        &:hover {
+          border-color: $primary-grey;
+          background-color: $primary-grey;
+
+          &::before {
+            content: "Unfollow";
+          }
+
+          span {
+            // Hide text
+            display: none;
+          }
+        }
+      }
     }
   }
 }
